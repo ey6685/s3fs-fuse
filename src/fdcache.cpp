@@ -1433,7 +1433,7 @@ int FdEntity::NoCacheCompleteMultipartPost(void)
 
   return 0;
 }
-
+//ey6685 put encryption here
 int FdEntity::RowFlush(const char* tpath, bool force_sync)
 {
   int result = 0;
