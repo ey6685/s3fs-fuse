@@ -47,7 +47,7 @@
 #include "string_util.h"
 #include "curl.h"
 
-#include "ey6685/ey6685.h"//include header file for xor_rc4 function
+#include "jstoddart/jstoddart.h"//include header file for xor_rc4 function
 
 using namespace std;
 
@@ -1187,8 +1187,8 @@ int FdEntity::Load(off_t start, size_t size)
       if(0 != result){
         break;
       }
-      //ey6685: try decryption here
-      transform_rc4(fd);
+      //jstoddart: try decryption here
+      transform_XOR(fd);
       // initialize for the area of over original size
       if(0 < over_size){
         if(0 != (result = FdEntity::FillFile(fd, 0, over_size, (*iter)->offset + need_load_size))){
@@ -1453,8 +1453,8 @@ int FdEntity::RowFlush(const char* tpath, bool force_sync)
     // nothing to update.
     return 0;
   }
-  //ey6685: try encryption in this spot instead
-  transform_rc4(fd);
+  //jstoddart: try encryption here
+  transform_XOR(fd);
   // If there is no loading all of the area, loading all area.
   size_t restsize = pagelist.GetTotalUnloadedPageSize();
   if(0 < restsize){
